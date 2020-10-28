@@ -27,12 +27,21 @@ var versionCmd = &cobra.Command{
 	},
 }
 
+// task子命令，执行task
+var taskCmd = &cobra.Command{
+	Use:   "task [the task name]",
+	Short: "execute tasks",
+	Args:  cobra.MinimumNArgs(1),
+	Run:   TaskRun,
+}
+
 // 项目初始化
 func init() {
 	// 初始化配置文件
 	InitConfig()
 	// 添加version命令
 	rootCmd.AddCommand(versionCmd)
+	rootCmd.AddCommand(taskCmd)
 }
 
 // 初始化配置文件
