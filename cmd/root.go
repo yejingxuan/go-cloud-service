@@ -35,6 +35,20 @@ var taskCmd = &cobra.Command{
 	Run:   TaskRun,
 }
 
+// 调用python
+/*var callPythonCmd = &cobra.Command{
+	Use:   "python [the task name]",
+	Short: "call Python",
+	Run:   CallPythonRun,
+}*/
+
+// 开启天气预报功能
+var weatherReportCmd = &cobra.Command{
+	Use:   "weather",
+	Short: "open weather report",
+	Run:   WeatherReportRun,
+}
+
 // 项目初始化
 func init() {
 	// 初始化配置文件
@@ -42,6 +56,8 @@ func init() {
 	// 添加version命令
 	rootCmd.AddCommand(versionCmd)
 	rootCmd.AddCommand(taskCmd)
+	//rootCmd.AddCommand(callPythonCmd)
+	rootCmd.AddCommand(weatherReportCmd)
 }
 
 // 初始化配置文件
