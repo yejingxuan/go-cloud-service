@@ -84,6 +84,8 @@ func StartHttpServer() {
 		v1.GET("/healthCheck", handler.HealthCheck)
 		//获取首页数据
 		v1.GET("/getIndexData", handler.GetIndexData)
+		//
+		v1.GET("/download", handler.Download)
 	}
 	port := viper.Get("general.app_port")
 	logger.Log.Info("start http server success on port: ", zap.Any("port", port))

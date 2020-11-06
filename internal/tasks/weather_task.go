@@ -22,7 +22,7 @@ type WeatherInfo struct {
 func StartWeatherReport() {
 	logger.Log.Info("start WeatherReportTask")
 	c := cron.New()
-	c.AddFunc("0 21 14 * * ?", doWeatherReportTask)
+	c.AddFunc("0 21 20 * * ?", doWeatherReportTask)
 	c.Start()
 
 }
