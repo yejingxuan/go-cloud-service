@@ -17,7 +17,7 @@ steps:
   - export GO111MODULE=on
   - export GOPROXY=https://goproxy.io
   - export PATH=$PATH:/usr/local/go/bin
-  - cd /opt/go/src/github.com/rscb && git clone http://$user:$password@192.168.0.216:10080/wangxin/task.git
+  - cd /opt/go/src/github.com/rscb && git clone https://github.com/yejingxuan/go-cloud-service.git
   - cd /opt/go/src/github.com/rscb/task && make microservice
   - rm -rf /opt/go/src/github.com/rscb/task
   environment:
@@ -43,7 +43,7 @@ steps:
 
 - name: sendmailfail
   commands:
-  - echo "尊敬的汪鑫哥哥，您好,您的task模块仓库已经自动构建完成，构建状态为:$DRONE_BUILD_STATUS，请检查代码问题，或联系管理员解决，谢谢!" | mail -s "autotask"  jingxuan.ye@qq.com
+  - echo "您好,您的task模块仓库已经自动构建完成，构建状态为:$DRONE_BUILD_STATUS，请检查代码问题，或联系管理员解决，谢谢!" | mail -s "autotask"  jingxuan.ye@qq.com
   when:
     status: 
     - failure
