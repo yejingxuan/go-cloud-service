@@ -1,54 +1,7 @@
 kind: pipeline
 name: default
-
-workspace:
-  base: /opt/go
-  path: src/github.com/rscb
-  
-environment:
-  base: /opt/go
-  path: src/github.com/rscb
-
 steps:
-- name: makeimage
-  commands:
-  - export GOPATH=/opt/go
-  - export GO111MODULE=on
-  - export GOPROXY=https://goproxy.io
-  - export PATH=$PATH:/usr/local/go/bin
-  - cd /opt/go/src/github.com/rscb && git clone https://github.com/yejingxuan/go-cloud-service.git
-  - cd /opt/go/src/github.com/rscb/task && make microservice
-  - rm -rf /opt/go/src/github.com/rscb/task
-  environment:
-    user:
-      from_secret: gituser
-    password:
-      from_secret: gitpassword
-    harboruser:
-      from_secret: k8shubuser
-    harborpassword:
-      from_secret: k8shubpassword
-
-- name: deployapp
-  commands:
-  - kubectl --kubeconfig /root/.kube/config delete pod  `kubectl --kubeconfig /root/.kube/config get pod  -n bjsh | grep bjsh-task | awk '{print $1}'` -n bjsh
-
-- name: sendmailsuccess
-  commands:
-  - echo "您好,您的task模块仓库已经自动构建完成，构建状态为:$DRONE_BUILD_STATUS，祝您代码毫无bug，畅通运行!" | mail -s "autotask"  jingxuan.ye@qq.com
-  when:
-    status: 
-    - success
-
-- name: sendmailfail
-  commands:
-  - echo "您好,您的task模块仓库已经自动构建完成，构建状态为:$DRONE_BUILD_STATUS，请检查代码问题，或联系管理员解决，谢谢!" | mail -s "autotask"  jingxuan.ye@qq.com
-  when:
-    status: 
-    - failure
-  
-trigger:
-  branch:
-    - main
-  event:
-    - push
+  - name: info
+    image: busybox
+    commands:
+      - echo "appdemo"
